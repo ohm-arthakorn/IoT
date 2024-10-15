@@ -5,11 +5,11 @@
 
 // ? Pin Definition
 #define SENSOR_PIN A0
-#define Blue_LED 2
-#define Green_LED 4
+#define Blue_LED 12
+#define Green_LED 8
 #define Yellow_LED 7
-#define Red_LED 8
-#define Buzzer 12
+#define Red_LED 4
+#define Buzzer 2
 #define Subscribe "SoundSensor/subscribe"
 #define Publish "SoundSensor/publish"
 
@@ -43,13 +43,10 @@ void callback(char *topic, byte *payload, unsigned int length)
   Serial.println(message);
   if (String(topic) == Publish)
   {
-    if (message == "ON")
+    // ถ้ามีการสั่งการให้ Node Red เป็น ฺButton มีการสั่งมาให้ Buzzer สามารถส่งเสียงได้!
+    if (message == "WARNING!")
     {
-      Serial.println("LED ON");
-    }
-    else if (message == "OFF")
-    {
-      Serial.println("LED OFF");
+      tone(Buzzer, 4000, 1000);
     }
   }
 }
@@ -149,9 +146,9 @@ void loop()
   peakToPeak = signalMax - signalMin;          // max - min = peak-peak amplitude
   int db = map(peakToPeak, 20, 900, 49.5, 90); // calibrate for deciBels
 
-  // Serial.print("Loudness: ");
-  // Serial.print(db);
-  // Serial.println("dB");
+  Serial.print("Loudness: ");
+  Serial.print(db);
+  Serial.println("dB");
 
   // ? This is OLD Code to turn on LIGHTBAR!
   /*if ((db > 65) && (db < 80))
@@ -206,7 +203,10 @@ void loop()
   if (db >= 80)
   {
     LightBar(1, 1, 1, 1);
-    tone(Buzzer, 4000, 1000);
+    // digitalWrite(Buzzer,1);
+    // delay(1000);
+    // digitalWrite(Buzzer,0);
+    tone(Buzzer, 10, 100);
   }
   else if ((db >= 65) && (db < 80))
   {
