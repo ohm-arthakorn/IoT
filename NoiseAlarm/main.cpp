@@ -179,7 +179,7 @@ void loop()
   delay(50);
 
   // ? Sending Data to NETPIE
-  if (startMillis - lastMsg > 5000)
+  if (startMillis - lastMsg > 2000)
   {
     lastMsg = startMillis;
     ++value;
