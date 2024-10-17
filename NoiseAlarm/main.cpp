@@ -150,57 +150,8 @@ void loop()
   Serial.print(db);
   Serial.println("dB");
 
-  // ? This is OLD Code to turn on LIGHTBAR!
-  /*if ((db > 65) && (db < 80))
-  {
-    digitalWrite(Green_LED, 1);
-    delay(10);
-    digitalWrite(Yellow_LED, 1);
-    delay(10);
-    digitalWrite(Red_LED, 1);
-    delay(10);
-    digitalWrite(Blue_LED, 0);
-    tone(Buzzer, 2000, 1000);
-  }
-  else if (db >= 80)
-  {
-    digitalWrite(Green_LED, 1);
-    delay(10);
-    digitalWrite(Yellow_LED, 1);
-    delay(10);
-    digitalWrite(Red_LED, 1);
-    delay(10);
-    digitalWrite(Blue_LED, 1);
-    delay(10);
-  }
-  else if ((db > 60) && (db < 65))
-  {
-    digitalWrite(Green_LED, 1);
-    delay(10);
-    digitalWrite(Yellow_LED, 1);
-    delay(10);
-    digitalWrite(Red_LED, 0);
-    digitalWrite(Blue_LED, 0);
-  }
-  else if ((db > 50) && (db < 55))
-  {
-    digitalWrite(Green_LED, 1);
-    delay(10);
-    digitalWrite(Yellow_LED, 0);
-    digitalWrite(Red_LED, 0);
-    digitalWrite(Blue_LED, 0);
-  }
-  else
-  {
-    digitalWrite(Red_LED, 0);
-    digitalWrite(Yellow_LED, 0);
-    digitalWrite(Green_LED, 0);
-    digitalWrite(Blue_LED, 0);
-  }
-*/
-
   // ? This is a NEW Code to turn on LIGHTBAR!
-  if (db >= 80)
+  if (db > 70)
   {
     LightBar(1, 1, 1, 1);
     // digitalWrite(Buzzer,1);
@@ -208,11 +159,11 @@ void loop()
     // digitalWrite(Buzzer,0);
     tone(Buzzer, 10, 100);
   }
-  else if ((db >= 65) && (db < 80))
+  else if ((db > 65) && (db <= 70))
   {
     LightBar(1, 1, 1, 0);
   }
-  else if ((db > 60) && (db < 65))
+  else if ((db > 60) && (db <= 65))
   {
     LightBar(1, 1, 0, 0);
   }
